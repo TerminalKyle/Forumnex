@@ -70,7 +70,7 @@ Please open an issue or submit a pull request.
 
 ## 📜 License
 
-MIT © [Dylan](https://github.com/your-username)
+MIT © [Dylan](https://github.com/TerminalKyle)
 
 ---
 
