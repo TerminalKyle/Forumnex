@@ -7,12 +7,20 @@
 
 /* Theme variables for the new light/blue design */
 :root {
-  --background: #f0f2f5; /* Light greyish background */
-  --foreground: #2d3748; /* Dark grey for text */
-  --primary-accent: #4299e1; /* Blue 500 for primary actions/highlights */
-  --secondary-accent: #63b3ed; /* Blue 400 for secondary elements */
-  --card-background: #ffffff; /* White for cards */
-  --border-color: #e2e8f0; /* Light border color */
+  --background: #121212; /* Very dark grey for the main background */
+  --foreground: #ffffff; /* White for primary text */
+  --card-background: #db1d1d; /* Even darker grey for cards and panels */
+  --border: #303030; /* Medium dark grey for borders */
+  --primary: #f06292; /* A vibrant pink for primary actions */
+  --primary-foreground: #ffffff; /* White text on primary buttons */
+  --muted: #33333a; /* Muted dark for subtle elements */
+  --muted-foreground: #b0b0b8; /* Soft grey for secondary text */
+  --accent: #e040fb; /* A bright, energetic purple accent */
+  --accent-foreground: #ffffff; /* White text on accent */
+  --destructive: #ff5252; /* Red for destructive actions */
+  --destructive-foreground: #ffffff; /* White text on destructive */
+
+  --radius: 0.75rem; /* Slightly more rounded corners */
 }
 
 @theme inline {
@@ -23,41 +31,56 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  /* Optional: Define a dark mode if needed, but for now, prioritize light mode */
   :root {
-    --background: #f0f2f5;
-    --foreground: #2d3748;
-    --primary-accent: #4299e1;
-    --secondary-accent: #63b3ed;
-    --card-background: #ffffff;
-    --border-color: #e2e8f0;
+    --background: #121212;
+    --foreground: #ffffff;
+    --card-background: #db1d1d;
+    --border: #303030;
+    --primary: #f06292;
+    --primary-foreground: #ffffff;
+    --muted: #33333a;
+    --muted-foreground: #b0b0b8;
+    --accent: #e040fb;
+    --accent-foreground: #ffffff;
+    --destructive: #ff5252;
+    --destructive-foreground: #ffffff;
   }
 }
 
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  line-height: 1.5;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; 
+  background-color: var(--background); 
 }
 
-/* Custom Scrollbar for sleek design (adjust colors for light theme) */
+body {
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar for sleek design */
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #f8f9fa; /* Lighter track */
+  background: var(--muted); 
   border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #cbd5e0; /* Light grey thumb */
+  background: var(--border); 
   border-radius: 10px;
-  border: 2px solid #f8f9fa; /* Border to match track */
+  border: 2px solid var(--muted); 
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #a0aec0; /* Slightly darker on hover */
+  background: var(--muted-foreground); 
 }

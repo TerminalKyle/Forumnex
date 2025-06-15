@@ -1,8 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import LoadingScreen from "./components/LoadingScreen";
+import SetupScreen from "./components/SetupScreen";
+import TopBar from "./components/TopBar";
+import LeftNav from "./components/LeftNav";
+import MainContent from "./components/MainContent";
+import RightPanel from "./components/RightPanel";
 
 // Types
 interface User {
@@ -55,12 +59,12 @@ export default function Home() {
   if (!isSetup) return <SetupScreen />;
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="w-full bg-card-background">
+    <div className="min-h-screen flex w-full h-full">
+      <LeftNav />
+      <div className="flex flex-col flex-1">
         <TopBar />
-        <div className="flex">
-          <LeftNav />
-          <MainContent />
+        <div className="flex flex-1">
+          <MainContent className="flex-1" />
           <RightPanel />
         </div>
       </div>

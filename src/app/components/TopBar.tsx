@@ -1,44 +1,34 @@
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import React from "react";
+import { Bell } from "lucide-react";
 
 export default function TopBar() {
-  const pathname = usePathname();
+  const handleBellClick = () => {
+    console.log("Bell icon clicked!");
+  };
+
+  const handleProfileClick = () => {
+    console.log("User profile clicked!");
+  };
 
   return (
-    <header className="border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold text-foreground">
-              ForumNex
-            </Link>
-            <nav className="ml-8 flex space-x-4">
-              <Link
-                href="/"
-                className={`px-3 py-2 rounded-md text-sm font-medium ${
-                  pathname === '/' ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                Home
-              </Link>
-              <Link
-                href="/categories"
-                className={`px-3 py-2 rounded-md text-sm font-medium ${
-                  pathname === '/categories' ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                Categories
-              </Link>
-            </nav>
-          </div>
-          <div className="flex items-center space-x-4">
-            <button className="bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90">
-              New Post
-            </button>
-            <div className="w-8 h-8 rounded-full bg-muted"></div>
-          </div>
+    <div className="flex items-center justify-end px-6 py-4 bg-card-background">
+      <div className="flex items-center space-x-4">
+        <Bell 
+          className="w-6 h-6 text-muted-foreground cursor-pointer hover:text-primary transition-colors"
+          onClick={handleBellClick}
+        />
+        <div 
+          className="flex items-center space-x-2 cursor-pointer hover:opacity-80 transition-opacity"
+          onClick={handleProfileClick}
+        >
+          <img
+            src="https://picsum.photos/seed/kaine/32/32"
+            alt="User Avatar"
+            className="w-8 h-8 rounded-full"
+          />
+          <span className="text-foreground font-semibold">Kaine Shutler</span>
         </div>
       </div>
-    </header>
+    </div>
   );
-} 
+}

@@ -7,15 +7,29 @@ export default {
   ],
   theme: {
     extend: {
-      boxShadow: {
-        // Removed previous deep/purple shadows as they don't fit the new light theme
-        // You can add new subtle shadows here if needed, matching the new design's lift
-      },
       colors: {
-        'primary-accent': '#4299e1', // Blue 500, matches globals.css
-        'secondary-accent': '#63b3ed', // Blue 400, matches globals.css
-        'card-background': '#ffffff', // White for cards, matches globals.css
-        'border-color': '#e2e8f0', // Light border color, matches globals.css
+        border: "var(--border)",
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        primary: {
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
+        },
+        destructive: {
+          DEFAULT: "var(--destructive)",
+          foreground: "var(--destructive-foreground)",
+        },
+        muted: {
+          DEFAULT: "var(--muted)",
+          foreground: "var(--muted-foreground)",
+        },
+        accent: {
+          DEFAULT: "var(--accent)",
+          foreground: "var(--accent-foreground)",
+        },
+        card: {
+          DEFAULT: "var(--card-background)",
+        },
       }
     },
   },
