@@ -8,7 +8,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
-  // Only allow admin creation if no users exist
   const userCount = await prisma.user.count();
   if (userCount > 0) {
     return NextResponse.json({ error: "Admin already exists" }, { status: 403 });

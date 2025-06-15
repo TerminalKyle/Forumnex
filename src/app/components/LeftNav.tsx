@@ -12,7 +12,7 @@ export default function LeftNav() {
         setSiteName(data.siteName);
       } catch (error) {
         console.error("Failed to fetch site name:", error);
-        setSiteName("Forumnex"); // Fallback in case of error
+        setSiteName("Forumnex");
       }
     };
 
@@ -21,12 +21,10 @@ export default function LeftNav() {
 
   const handleNavItemClick = (itemName: string) => {
     console.log(`Navigating to: ${itemName}`);
-    // In a real application, you would use a router here
   };
 
   const handleInviteFriendClick = () => {
     console.log("Invite friend button clicked!");
-    // In a real application, this would trigger an invite flow
   };
 
   const navItems = [
