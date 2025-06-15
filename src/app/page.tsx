@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import LoadingScreen from "./components/LoadingScreen";
 import SetupScreen from "./components/SetupScreen";
 import TopBar from "./components/TopBar";
@@ -36,24 +37,42 @@ interface Topic {
 
 
 export default function Home() {
+  const router = useRouter();
   const [isSetup, setIsSetup] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let mounted = true;
+
     async function checkSetupStatus() {
       try {
         const res = await fetch("/api/setup/status");
         const data = await res.json();
-        setIsSetup(data.setupDone);
+        if (mounted) {
+          setIsSetup(data.setupDone);
+          setLoading(false);
+          
+          // Redirect to setup if not done
+          if (!data.setupDone) {
+            router.push('/setup');
+          }
+        }
       } catch (error) {
         console.error("Failed to fetch setup status:", error);
-        setIsSetup(false);
-      } finally {
-        setLoading(false);
+        if (mounted) {
+          setIsSetup(false);
+          setLoading(false);
+          router.push('/setup');
+        }
       }
     }
+
     checkSetupStatus();
-  }, []);
+
+    return () => {
+      mounted = false;
+    };
+  }, [router]);
 
   if (loading) return <LoadingScreen />;
   if (!isSetup) return <SetupScreen />;

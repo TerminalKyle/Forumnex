@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { exec } from "child_process";
 import { promises as fs } from "fs";
 import path from "path";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma"; // Import the singleton Prisma client
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient(); // Remove direct instantiation
 
 export async function POST(req: NextRequest) {
   const { dbHost, dbPort, dbUser, dbPassword, dbName } = await req.json();

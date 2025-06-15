@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from 'react';
 import AdminLayout from '../components/AdminLayout';
 import { Home, BookOpen, Users, GraduationCap, MessageSquare, User, Settings, LayoutDashboard, List, FolderOpen, Puzzle, FileText, BarChart2, LogOut } from 'lucide-react';
