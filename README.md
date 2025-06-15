@@ -36,3 +36,42 @@ _Coming Soon..._
 | [TypeScript](https://www.typescriptlang.org/) | Type safety throughout             |
 
 ---
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/TerminalKyle/forumnex.git
+cd forumnex
+npm install
+npm run dev
+```
+
+Then visit `http://localhost:3000` in your browser.
+
+---
+
+## 🧪 Roadmap
+
+- [x] Admin layout with sidebar
+- [x] Dynamic route highlighting
+- [ ] Full CRUD for forum posts
+- [ ] Auth system (email or OAuth)
+- [ ] Settings panel
+- [ ] Deployment docs (Docker & Vercel)
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!  
+Please open an issue or submit a pull request.
+
+---
+
+## 📜 License
+
+MIT © [Dylan](https://github.com/your-username)
+
+---
+
+> Crafted with ❤️
