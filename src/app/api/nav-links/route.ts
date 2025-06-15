@@ -27,7 +27,7 @@ export async function POST(request: Request) {
       data: {
         name,
         path,
-        icon: icon || '', // Default to empty string if not provided
+        icon: icon || '', 
         section,
         order,
       },

@@ -1,3 +1,5 @@
+// GET INVIDIVAL USERS VIA API
+
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 

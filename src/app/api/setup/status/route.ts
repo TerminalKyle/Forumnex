@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/lib/prisma"; // Import the singleton Prisma client
+// CHECK SETUP STATUS VIA API
 
-// const prisma = new PrismaClient(); // Remove direct instantiation
+import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 
 export async function GET() {
   try {

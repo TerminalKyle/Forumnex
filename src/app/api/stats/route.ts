@@ -1,17 +1,16 @@
+// GET STATS VIA API
+
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
 export async function GET() {
   try {
-    // Get basic stats
     const [totalMembers, totalPosts] = await Promise.all([
       prisma.user.count(),
       prisma.post.count(),
     ]);
 
-    // Get recent activity
     const recentActivity = await Promise.all([
-      // Recent user registrations
       prisma.user.findMany({
         take: 5,
         orderBy: { createdAt: 'desc' },
@@ -38,7 +37,6 @@ export async function GET() {
       }),
     ]);
 
-    // Format activity data
     const formattedActivity = [
       ...recentActivity[0].map(user => ({
         id: `user-${user.id}`,

@@ -1,10 +1,10 @@
+// SETUP DATABASE VIA API
+
 import { NextRequest, NextResponse } from "next/server";
 import { exec } from "child_process";
 import { promises as fs } from "fs";
 import path from "path";
-import prisma from "@/lib/prisma"; // Import the singleton Prisma client
-
-// const prisma = new PrismaClient(); // Remove direct instantiation
+import prisma from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
   const { dbHost, dbPort, dbUser, dbPassword, dbName } = await req.json();
@@ -22,13 +22,11 @@ export async function POST(req: NextRequest) {
   const envPath = path.join(process.cwd(), ".env");
 
   try {
-    // Update .env file
     let envContent = await fs.readFile(envPath, "utf-8");
     envContent = envContent.replace(/DATABASE_URL=".*"/, `DATABASE_URL="${connectionString}"`);
     await fs.writeFile(envPath, envContent);
 
-    // Run Prisma migration/db push
-    const prismaCommand = `npx prisma db push --skip-generate --accept-data-loss`; // Using db push for initial setup
+    const prismaCommand = `npx prisma db push --skip-generate --accept-data-loss`; 
 
     await new Promise((resolve, reject) => {
       exec(prismaCommand, { cwd: process.cwd() }, (error, stdout, stderr) => {
@@ -44,11 +42,10 @@ export async function POST(req: NextRequest) {
       });
     });
 
-    // Initialize the Setting table entry if it doesn't exist
     await prisma.setting.upsert({
       where: { id: 1 },
       update: {},
-      create: { id: 1, setupDone: false }, // Mark as false initially for setup wizard to continue
+      create: { id: 1, setupDone: false },
     });
 
     return NextResponse.json({ success: true });
