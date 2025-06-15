@@ -1,8 +1,19 @@
 import { NextResponse } from 'next/server';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export async function GET() {
-  // In a real application, you would fetch this from your database
-  const siteName = "Forumnex"; 
+  try {
+    const settings = await prisma.setting.findUnique({
+      where: { id: 1 }, 
+    });
 
-  return NextResponse.json({ siteName });
+    const siteName = settings?.forumName || "Forumnex"; 
+
+    return NextResponse.json({ siteName });
+  } catch (error) {
+    console.error("Error fetching site name from DB:", error);
+    return NextResponse.json({ siteName: "Forumnex" }, { status: 500 }); 
+  }
 } 

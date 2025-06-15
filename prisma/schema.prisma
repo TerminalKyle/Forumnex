@@ -79,6 +79,36 @@ model Setting {
   setupDone  Boolean  @default(false)
 }
 
+model NavLink {
+  id        String   @id @default(cuid())
+  name      String
+  path      String
+  icon      String // e.g., "Home" for LucideReact Home icon
+  section   String // e.g., "LEARN", "MY STUFF"
+  order     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Addon {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  description String?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Page {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  content     String
+  isPublished Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
 enum Role {
   ADMIN
   MODERATOR
