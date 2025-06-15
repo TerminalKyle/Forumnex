@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  username      String    @unique
+  password      String
+  role          Role      @default(MEMBER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  threads       Thread[]
+  posts         Post[]
+  profile       Profile?
+}
+
+model Profile {
+  id          String   @id @default(cuid())
+  bio         String?
+  avatar      String?
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  slug        String    @unique
+  threads     Thread[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Thread {
+  id          String    @id @default(cuid())
+  title       String
+  content     String
+  slug        String    @unique
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    String
+  category    Category  @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  posts       Post[]
+  isPinned    Boolean   @default(false)
+  isLocked    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  content   String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  thread    Thread   @relation(fields: [threadId], references: [id])
+  threadId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Setting {
+  id         Int      @id @default(1)
+  forumName  String?
+  forumUrl   String?
+  logoUrl    String?
+  theme      String?  // e.g., 'light', 'dark', or custom
+  setupDone  Boolean  @default(false)
+}
+
+enum Role {
+  ADMIN
+  MODERATOR
+  MEMBER
+  GUEST
+} 
